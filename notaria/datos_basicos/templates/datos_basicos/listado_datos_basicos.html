@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row mt-4">
+        <div class="col-sm-6">
+            <h2>Listado de datos básicos</h2>
+        </div>
+        <div class="col-sm-6">
+            <div class="flex flex-end">
+                <a href="{% url 'datos_basicos:alta_datos_basicos' %}" class="btn btn-info"> Alta datos básicos</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <th>Nombre</th>
+                        <th>Celular</th>
+                        <th>E-mail</th>
+                        </thead>
+                        <tbody>
+                        {% for basico in datos_basicos %}
+                            <tr>
+                                <td>{{ basico.get_full_name }}</td>
+                                <td>{{ basico.celular }}</td>
+                                <td>{{ basico.email }}</td>
+
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+    </div>
+{% endblock %}

@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
-{% block container %}
+{% block content %}
 <h2>Datos Basicos</h2>
     <hr>
-    <form action="" method="GET" class="">
-        {{ form }}
+    <form action="" method="POST" class="">
+        {% csrf_token %}
+        {{form.as_table}}
+        <button class="btn btn-info">Guardar</button>
     </form>
 
 {% endblock %}

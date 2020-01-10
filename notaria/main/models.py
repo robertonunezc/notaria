@@ -80,16 +80,58 @@ class DatosBasicos(Persona):
         (VIUDO, "VIUDO")
     )
 
+    FMM1 = 0
+    INE = 1
+    PASAPORTE = 2
+
+    DOCUMENTO = (
+        (FMM1, "FMM1"),
+        (INE, "INE"),
+        (PASAPORTE, "PASAPORTE")
+    )
+
+    CARPINTERO = 0
+    MECANICO = 1
+
+    TRABAJO = (
+        (CARPINTERO, "CARPINTERO"),
+        (MECANICO, "MECANICO")
+    )
+
+    MEXICO = 0
+    CUBA = 1
+
+    COUNTRY = (
+        (MEXICO, "MEXICO"),
+        (CUBA, "CUBA")
+    )
+
+    MEXICO = 0
+    CUBA = 1
+
+    COUNTRY1= (
+        (MEXICO, "MEXICO"),
+        (CUBA, "CUBA")
+    )
+
+    YULIET = 0
+    ALEXANDER = 1
+
+    COUPLE = (
+        (YULIET, "YULIET"),
+        (ALEXANDER, "ALEXANDER")
+    )
+
     titulo = models.IntegerField(choices=TITULOPERSONAL)
     fecha_nacimiento = models.DateField(null=False, blank=False)
     sexo = models.IntegerField(choices=GENERO)
-    ocupacion = models.ForeignKey(Ocupacion, on_delete=models.SET_NULL, null=True)
-    pais_nacimiento = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True, related_name='natural')
-    pais_nacionalidad = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True, related_name='nacionalidad')
+    ocupacion = models.IntegerField(choices=TRABAJO)#models.ForeignKey(Ocupacion, on_delete=models.SET_NULL, null=True)
+    pais_nacimiento = models.IntegerField(choices=COUNTRY)#models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True, related_name='natural')
+    pais_nacionalidad = models.IntegerField(choices=COUNTRY1)#models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True, related_name='nacionalidad')
     ciudad_de_origen = models.CharField(max_length=80, unique=True)
     documento_migratorio = models.CharField(max_length=80, unique=True)
     calidad_migratoria = models.CharField(max_length=80, unique=True)
-    tipo_de_identificacion = models.ForeignKey(TipoIdentificacion, on_delete=models.SET_NULL, null=True)
+    tipo_de_identificacion = models.IntegerField(choices=DOCUMENTO) #models.ForeignKey(TipoIdentificacion, on_delete=models.SET_NULL, null=True)
     folio_de_identificacion = models.CharField(max_length=80, unique=True)
     emite_identificacion = models.CharField(max_length=80, unique=True)
     clave_larga_distancia = models.IntegerField(unique=True)
@@ -109,7 +151,7 @@ class DatosBasicos(Persona):
     twitter = models.CharField(max_length=80, unique=True)
     web = models.CharField(max_length=80, unique=True)
     estado_civil = models.IntegerField(choices=ESTADOCIVIL)
-    conyuge = models.ForeignKey(ConyugeActual, on_delete=models.SET_NULL, null=True)
+    conyuge = models.IntegerField(choices=COUPLE)#models.ForeignKey(ConyugeActual, on_delete=models.SET_NULL, null=True)
 
     def get_full_name(self):
         full_name = '%s %s %s' % (self.nombre, self.primer_apellido, self.segundo_apellido)
