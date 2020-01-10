@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'notaria.main'
+    'notaria.main',
+    'notaria.datos_basicos'
 ]
 
 MIDDLEWARE = [
