@@ -1,0 +1,5 @@
+Django==2.2.7
+djangorestframework
+mysqlclient==1.4.6
+pdfkit==0.6
+openpyxl==2.6.2
