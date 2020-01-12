@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block custom_style %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{% static 'vendors/chosen/chosen.css' %}">
+{% endblock %}
+{% block content %}
+    <h2>Editar datos básicos</h2>
+    <hr>
+    <form action="" method="post" class="">
+        {% csrf_token %}
+        {{form.as_table}}
+        <button class="btn btn-info">Guardar</button>
+    </form>
+{% endblock %}
