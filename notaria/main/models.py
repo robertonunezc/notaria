@@ -24,20 +24,17 @@ class Persona(models.Model):
 
 class Ocupacion(models.Model):
     nombre = models.CharField(max_length=80)
-
     def __str__(self):
         return self.nombre
 
 class Pais(models.Model):
     nombre = models.CharField(max_length=80)
-
     def __str__(self):
         return self.nombre
 
 
 class TipoIdentificacion(models.Model):
     nombre = models.CharField(max_length=80)
-
     def __str__(self):
         return self.nombre
 
@@ -80,31 +77,31 @@ class DatosBasicos(Persona):
     documento_migratorio = models.CharField(max_length=80, unique=True)
     calidad_migratoria = models.CharField(max_length=80, unique=True)
     tipo_de_identificacion = models.ForeignKey(TipoIdentificacion, on_delete=models.SET_NULL, null=True)
-    folio_de_identificacion = models.CharField(max_length=80, unique=True)
-    emite_identificacion = models.CharField(max_length=80, unique=True)
-    clave_larga_distancia = models.IntegerField(unique=True)
-    telefono_casa = models.IntegerField(unique=True)
-    telefono_casa_2 = models.IntegerField(unique=True)
-    extension = models.IntegerField(unique=True)
+    folio_de_identificacion = models.CharField(max_length=80)
+    emite_identificacion = models.CharField(max_length=80)
+    clave_larga_distancia = models.IntegerField(blank=True)
+    telefono_casa = models.IntegerField(blank=True)
+    telefono_casa_2 = models.IntegerField(blank=True)
+    extension = models.IntegerField(blank=True)
     celular = models.IntegerField(unique=True)
-    celular_2 = models.IntegerField(unique=True)
-    telefono_oficina = models.IntegerField(unique=True)
-    telefono_oficina_2 = models.IntegerField(unique=True)
-    telefono_nextel = models.IntegerField(unique=True)
-    id_nextel = models.IntegerField(unique=True)
+    celular_2 = models.IntegerField(unique=True, blank=True)
+    telefono_oficina = models.IntegerField(blank=True)
+    telefono_oficina_2 = models.IntegerField(blank=True)
+    telefono_nextel = models.IntegerField(blank=True)
+    id_nextel = models.IntegerField(blank=True)
     email = models.CharField(max_length=80, unique=True)
-    email_2 = models.CharField(max_length=80, unique=True)
-    email_3 = models.CharField(max_length=80, unique=True)
-    facebook = models.CharField(max_length=80, unique=True)
-    twitter = models.CharField(max_length=80, unique=True)
-    web = models.CharField(max_length=80, unique=True)
+    email_2 = models.CharField(max_length=80, unique=True, blank=True)
+    email_3 = models.CharField(max_length=80, unique=True, blank=True)
+    facebook = models.CharField(max_length=80, unique=True, blank=True)
+    twitter = models.CharField(max_length=80, unique=True, blank=True)
+    web = models.CharField(max_length=80, unique=True, blank=True)
     estado_civil = models.IntegerField(choices=ESTADOCIVIL)
-    conyuge_apellido_paterno = models.CharField(max_length=80)
-    conyuge_apellido_materno = models.CharField(max_length=80)
-    conyuge_nombre = models.CharField(max_length=80)
-    fecha_matrimonio = models.DateField(null=False, blank=False)
-    registro_civil = models.CharField(max_length=80, unique=True)
-    nro_acta = models.CharField(max_length=80, unique=True)
+    conyuge_apellido_paterno = models.CharField(max_length=80, blank=True)
+    conyuge_apellido_materno = models.CharField(max_length=80, blank=True)
+    conyuge_nombre = models.CharField(max_length=80, blank=True)
+    fecha_matrimonio = models.DateField(null=False, blank=True)
+    registro_civil = models.CharField(max_length=80, unique=True, blank=True)
+    nro_acta = models.CharField(max_length=80, unique=True, blank=True)
 
     def get_full_name(self):
         full_name = '%s %s %s' % (self.nombre, self.apellido_paterno, self.apellido_materno)
