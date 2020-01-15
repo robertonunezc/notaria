@@ -51,8 +51,8 @@ class DatosBasicos(Persona):
     MASCULINO = 0
     FEMENINO = 1
     GENERO = (
-        (MASCULINO, "MASCULINO"),
-        (FEMENINO, "FEMENINO")
+        (MASCULINO, "Masculino"),
+        (FEMENINO, "Femenino")
     )
 
     CASADO = 0
@@ -61,10 +61,10 @@ class DatosBasicos(Persona):
     VIUDO = 3
 
     ESTADOCIVIL = (
-        (CASADO, "CASADO"),
-        (SOLTERO, "SOLTERO"),
-        (DIVORCIADO, "DIVORCIADO"),
-        (VIUDO, "VIUDO")
+        (CASADO, "Casado"),
+        (SOLTERO, "Soltero"),
+        (DIVORCIADO, "Divorciado"),
+        (VIUDO, "Viudo")
     )
 
     titulo = models.IntegerField(choices=TITULOPERSONAL)
