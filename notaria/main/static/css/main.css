@@ -1,0 +1,8 @@
+.alta-form {
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+}
+.alta-form > p {
+    margin: 15px;
+}
