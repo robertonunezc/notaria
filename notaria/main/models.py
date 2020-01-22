@@ -23,18 +23,26 @@ class Persona(models.Model):
 
 
 class Ocupacion(models.Model):
+    class Meta:
+        verbose_name = 'Ocupación'
+        verbose_name_plural = "Ocupaciones"
     nombre = models.CharField(max_length=80)
+
     def __str__(self):
         return self.nombre
 
-class Pais(models.Model):
-    nombre = models.CharField(max_length=80)
-    def __str__(self):
-        return self.nombre
+# class Pais(models.Model):
+#     nombre = models.CharField(max_length=80)
+#     def __str__(self):
+#         return self.nombre
 
 
 class TipoIdentificacion(models.Model):
+    class Meta:
+        verbose_name = 'Tipo de Identificación'
+        verbose_name_plural = "Tipos de Identificación"
     nombre = models.CharField(max_length=80)
+
     def __str__(self):
         return self.nombre
 
@@ -71,8 +79,8 @@ class DatosBasicos(Persona):
     fecha_nacimiento = models.DateField(null=False, blank=False)
     sexo = models.IntegerField(choices=GENERO)
     ocupacion = models.ForeignKey(Ocupacion, on_delete=models.SET_NULL, null=True)
-    pais_nacimiento = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True, related_name='natural')
-    pais_nacionalidad = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True, related_name='nacionalidad')
+    pais_nacimiento = models.CharField(max_length=80) #models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True, related_name='natural')
+    pais_nacionalidad = models.CharField(max_length=80) #models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True, related_name='nacionalidad')
     ciudad_de_origen = models.CharField(max_length=80, unique=True)
     documento_migratorio = models.CharField(max_length=80, unique=True)
     calidad_migratoria = models.CharField(max_length=80, unique=True)
@@ -129,6 +137,9 @@ class NMunicipio(models.Model):
 
 
 class NCodigoPostal(models.Model):
+    class Meta:
+        verbose_name = 'Código Postal'
+        verbose_name_plural = "Códigos Postales"
     codigo = models.CharField(max_length=80, unique=True)
     municipio = models.ForeignKey(NMunicipio, on_delete=models.CASCADE)
     activo = models.BooleanField(default=True)
