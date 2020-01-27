@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block content %}
     <div class="row mt-4">
         <div class="col-sm-6">
@@ -12,11 +13,12 @@
     </div>
     <div class="row">
         <div class="card-body">
-                    <table class="table">
+                    <table class="table data-table">
                         <thead>
                         <th>Nombre</th>
                         <th>Celular</th>
                         <th>E-mail</th>
+                        <th>Acciones</th>
                         </thead>
                         <tbody>
                         {% for basico in datos_basicos.all %}
@@ -28,7 +30,6 @@
                                     <a href="{% url 'datos_basicos:editar_datos_basicos' datos_basicos_id=basico.pk %}"
                                         class="btn btn-info btn-sm">Editar</a>
                                 </td>
-
                             </tr>
                         {% endfor %}
 
@@ -36,4 +37,16 @@
                     </table>
                 </div>
     </div>
+{% endblock %}
+{% block custom_css %}
+    <link rel="stylesheet" href="{% static 'vendor/datatables/dataTables.bootstrap4.css' %}">
+{% endblock %}
+{% block custom_js %}
+    <script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+
+    <script>
+        $(function () {
+            $('.data-table').DataTable()
+        })
+    </script>
 {% endblock %}
