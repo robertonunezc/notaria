@@ -46,6 +46,16 @@ class TipoIdentificacion(models.Model):
     def __str__(self):
         return self.nombre
 
+
+class TipoTramite(models.Model):
+    class Meta:
+        verbose_name = 'Tipo de trámite'
+        verbose_name_plural = "Tipos de trámites"
+    nombre = models.CharField(max_length=80)
+
+    def __str__(self):
+        return self.nombre
+
 class DatosBasicos(Persona):
     usuario = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
 
@@ -63,13 +73,15 @@ class DatosBasicos(Persona):
         (FEMENINO, "Femenino")
     )
 
-    CASADO = 0
+    CASADO_BIENES_MANCOMUNADOS = 0
+    CASADO_BIENES_SEPARADOS = 4
     SOLTERO = 1
     DIVORCIADO = 2
     VIUDO = 3
 
     ESTADOCIVIL = (
-        (CASADO, "Casado"),
+        (CASADO_BIENES_MANCOMUNADOS, "Casado Bienes Mancomunados"),
+        (CASADO_BIENES_SEPARADOS, "Casado Bienes Separados"),
         (SOLTERO, "Soltero"),
         (DIVORCIADO, "Divorciado"),
         (VIUDO, "Viudo")
@@ -85,6 +97,7 @@ class DatosBasicos(Persona):
     documento_migratorio = models.CharField(max_length=80, unique=True)
     calidad_migratoria = models.CharField(max_length=80, unique=True)
     tipo_de_identificacion = models.ForeignKey(TipoIdentificacion, on_delete=models.SET_NULL, null=True)
+    tipo_de_tramite = models.ForeignKey(TipoTramite, on_delete=models.SET_NULL, null=True)
     folio_de_identificacion = models.CharField(max_length=80)
     emite_identificacion = models.CharField(max_length=80)
     clave_larga_distancia = models.IntegerField(blank=True)
@@ -95,8 +108,6 @@ class DatosBasicos(Persona):
     celular_2 = models.IntegerField(unique=True, blank=True)
     telefono_oficina = models.IntegerField(blank=True)
     telefono_oficina_2 = models.IntegerField(blank=True)
-    telefono_nextel = models.IntegerField(blank=True)
-    id_nextel = models.IntegerField(blank=True)
     email = models.CharField(max_length=80, unique=True)
     email_2 = models.CharField(max_length=80, unique=True, blank=True)
     email_3 = models.CharField(max_length=80, unique=True, blank=True)

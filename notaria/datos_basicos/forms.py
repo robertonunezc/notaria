@@ -1,6 +1,6 @@
 from django import forms
 from notaria.main.models import Persona, Ocupacion, TipoIdentificacion, DatosBasicos#, Direccion, Pais, NEstado
-
+from django.contrib.admin import widgets
 
 class PersonaForm(forms.ModelForm):
     class Meta:
@@ -40,6 +40,8 @@ class TipoIdentificacionForm(forms.ModelForm):
 
 
 class DatosBasicosForm(forms.ModelForm):
+    fecha_nacimiento = forms.DateField(widget=forms.DateInput(attrs={'class': 'date-picker'}))
+    fecha_matrimonio = forms.DateField(widget=forms.DateInput(attrs={'class': 'date-picker'}))
     class Meta:
         model = DatosBasicos
         fields = '__all__'
