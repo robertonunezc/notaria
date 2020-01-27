@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from notaria.main.models import DatosBasicos
 from notaria.datos_basicos.forms import DatosBasicosForm
 from django.contrib.auth.decorators import login_required
-
+from openpyxl import Workbook
 
 def alta_datos_basicos(request):
     form = DatosBasicosForm()
@@ -39,3 +39,31 @@ def editar_datos_basicos(request, datos_basicos_id):
         'form': form
     }
     return render(request, 'datos_basicos/editar_datos_basicos.html', context=context)
+
+
+@login_required
+def get_datos_basicos():
+    datos_basicos = DatosBasicos.objects.all().order_by('-id')
+    return datos_basicos
+
+@login_required
+def exportar_excel(request):
+    datos_basicos = get_datos_basicos()
+    wb = get_reporte_datos_basicos_workbook(datos_basicos=datos_basicos)
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="reporte.xls"'
+    wb.save(response)
+    return response
+
+
+def get_reporte_datos_basicos_workbook(datos_basicos):
+    wb = Workbook()
+    ws = wb.active
+    titulos = list()
+    titulos.append("Nombre")
+    titulos.append("Celular")
+    titulos.append("Email")
+    ws.append(titulos)
+    for dato in datos_basicos:
+        ws.append(dato)
+    return wb

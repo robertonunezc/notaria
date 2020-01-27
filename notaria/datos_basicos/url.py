@@ -6,5 +6,6 @@ app_name = 'datos_basicos'
 urlpatterns = [
     path('alta/', views.alta_datos_basicos ,name='alta_datos_basicos'),
     path('listado/', views.listado_datos_basicos, name='listado_datos_basicos'),
-    path('editar/<int:datos_basicos_id>', views.editar_datos_basicos, name='editar_datos_basicos')
+    path('editar/<int:datos_basicos_id>', views.editar_datos_basicos, name='editar_datos_basicos'),
+    path('exportar/', views.exportar_excel ,name='exportar_excel')
 ]
