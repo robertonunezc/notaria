@@ -41,12 +41,12 @@ def editar_datos_basicos(request, datos_basicos_id):
     return render(request, 'datos_basicos/editar_datos_basicos.html', context=context)
 
 
-@login_required
+
 def get_datos_basicos():
     datos_basicos = DatosBasicos.objects.all().order_by('-id')
     return datos_basicos
 
-@login_required
+
 def exportar_excel(request):
     datos_basicos = get_datos_basicos()
     wb = get_reporte_datos_basicos_workbook(datos_basicos=datos_basicos)
@@ -65,5 +65,9 @@ def get_reporte_datos_basicos_workbook(datos_basicos):
     titulos.append("Email")
     ws.append(titulos)
     for dato in datos_basicos:
-        ws.append(dato)
+        datos_list = list()
+        datos_list.append(dato.__str__())
+        datos_list.append(dato.celular.__str__())
+        datos_list.append(dato.email.__str__())
+        ws.append(datos_list)
     return wb
