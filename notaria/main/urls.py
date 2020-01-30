@@ -6,5 +6,5 @@ app_name = 'main'
 
 urlpatterns = [
     #path('', views.dashboard ,name='dashboard'),
-    path('', views_notarias.alta_datos_basicos ,name='alta_datos_basicos'),
+    path('', views_notarias.alta_datos_basicos,name='alta_datos_basicos'),
 ]

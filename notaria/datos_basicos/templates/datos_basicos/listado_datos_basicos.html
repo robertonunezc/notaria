@@ -7,35 +7,53 @@
         </div>
         <div class="col-sm-6">
             <div class="flex flex-end">
-                <a href="{% url 'datos_basicos:alta_datos_basicos' %}" class="btn btn-info"> Alta datos básicos</a>
+                <a href="{% url 'datos_basicos:alta_datos_basicos' %}" class="btn btn-info mr-2"> Alta datos básicos</a>
+                <button class="btn btn-success btn-exportarxls"> Exportar</button>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="card-body">
-                    <table class="table data-table">
-                        <thead>
-                        <th>Nombre</th>
-                        <th>Celular</th>
-                        <th>E-mail</th>
-                        <th>Acciones</th>
-                        </thead>
-                        <tbody>
-                        {% for basico in datos_basicos.all %}
-                            <tr>
-                                <td>{{ basico.get_full_name }}</td>
-                                <td>{{ basico.celular }}</td>
-                                <td>{{ basico.email }}</td>
-                                 <td>
-                                    <a href="{% url 'datos_basicos:editar_datos_basicos' datos_basicos_id=basico.pk %}"
-                                        class="btn btn-info btn-sm">Editar</a>
-                                </td>
-                            </tr>
-                        {% endfor %}
+        <div class="col-sm-12">
+            <form action="#" method="post" class="form-horizontal flex filters-form">
+                {% csrf_token %}
+                <input type="date" name="fecha-inicio" class="form-control">
+                <input type="date" name="fecha-fin" class="form-control">
+                <select name="tipo-tramite" id="tipo-tramite">
+                    {% for tipo in tipo_tramites %}
+                        <option value="-1" selected>--seleccione--</option>
+                        <option value="{{ tipo.pk }}">{{ tipo.nombre }}</option>
+                    {% endfor %}
 
-                        </tbody>
-                    </table>
-                </div>
+                </select>
+                <button class="btn btn-success" type="submit">Filtrar</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <th>Nombre</th>
+                <th>Celular</th>
+                <th>E-mail</th>
+                <th>Acciones</th>
+                </thead>
+                <tbody>
+                {% for basico in datos_basicos.all %}
+                    <tr>
+                        <td>{{ basico.get_full_name }}</td>
+                        <td>{{ basico.celular }}</td>
+                        <td>{{ basico.email }}</td>
+                        <td>
+                            <a href="{% url 'datos_basicos:editar_datos_basicos' datos_basicos_id=basico.pk %}"
+                               class="btn btn-info btn-sm">Editar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}
 {% block custom_css %}
@@ -47,6 +65,10 @@
     <script>
         $(function () {
             $('.data-table').DataTable()
+            $('.btn-exportarxls').on('click', function (e) {
+                e.preventDefault();
+                $('.filters-form').attr('action', "/datos_basicos/exportar/").submit()
+            })
         })
     </script>
 {% endblock %}
