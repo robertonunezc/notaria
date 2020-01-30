@@ -124,7 +124,7 @@ class DatosBasicos(Persona):
     fecha_creacion = models.DateField(auto_created=True)
 
     def get_full_name(self):
-        full_name = '%s %s %s' % (self.nombre, self.apellido_paterno, self.apellido_materno)
+        full_name = '%s. %s %s %s' % (self.TITULOPERSONAL[self.titulo][1], self.nombre, self.apellido_paterno, self.apellido_materno)
         return full_name.strip()
 
     def __str__(self):
