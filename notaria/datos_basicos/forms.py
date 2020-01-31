@@ -41,7 +41,7 @@ class TipoIdentificacionForm(forms.ModelForm):
 
 class DatosBasicosForm(forms.ModelForm):
     fecha_nacimiento = forms.DateField(widget=forms.DateInput(attrs={'class': 'date-picker'}))
-    fecha_matrimonio = forms.DateField(widget=forms.DateInput(attrs={'class': 'date-picker'}))
+    fecha_matrimonio = forms.DateField(widget=forms.DateInput(attrs={'class': 'date-picker'}), required=False)
     class Meta:
         model = DatosBasicos
         fields = '__all__'
