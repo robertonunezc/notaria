@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
+from django.core.validators import RegexValidator
 
 # Create your models here.
 
@@ -57,7 +58,8 @@ class TipoTramite(models.Model):
         return self.nombre
 
 class DatosBasicos(Persona):
-    usuario = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
+    tipo_de_tramite = models.ForeignKey(TipoTramite, on_delete=models.SET_NULL, null=True)
+    #usuario = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     SR = 0
     SRA = 1
@@ -93,38 +95,37 @@ class DatosBasicos(Persona):
     ocupacion = models.ForeignKey(Ocupacion, on_delete=models.SET_NULL, null=True)
     pais_nacimiento = models.CharField(max_length=80) #models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True, related_name='natural')
     pais_nacionalidad = models.CharField(max_length=80) #models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True, related_name='nacionalidad')
-    ciudad_de_origen = models.CharField(max_length=80, unique=True)
-    documento_migratorio = models.CharField(max_length=80, unique=True)
-    calidad_migratoria = models.CharField(max_length=80, unique=True)
+    ciudad_de_origen = models.CharField(max_length=80)
+    documento_migratorio = models.CharField(max_length=80, null=True, blank=True)
+    calidad_migratoria = models.CharField(max_length=80, blank=True, null=True)
     tipo_de_identificacion = models.ForeignKey(TipoIdentificacion, on_delete=models.SET_NULL, null=True)
-    tipo_de_tramite = models.ForeignKey(TipoTramite, on_delete=models.SET_NULL, null=True)
-    folio_de_identificacion = models.CharField(max_length=80)
-    emite_identificacion = models.CharField(max_length=80)
-    clave_larga_distancia = models.IntegerField(blank=True)
-    telefono_casa = models.IntegerField(blank=True)
-    telefono_casa_2 = models.IntegerField(blank=True)
-    extension = models.IntegerField(blank=True)
-    celular = models.IntegerField(unique=True)
-    celular_2 = models.IntegerField(unique=True, blank=True)
-    telefono_oficina = models.IntegerField(blank=True)
-    telefono_oficina_2 = models.IntegerField(blank=True)
-    email = models.CharField(max_length=80, unique=True)
-    email_2 = models.CharField(max_length=80, unique=True, blank=True)
-    email_3 = models.CharField(max_length=80, unique=True, blank=True)
-    facebook = models.CharField(max_length=80, unique=True, blank=True)
-    twitter = models.CharField(max_length=80, unique=True, blank=True)
-    web = models.CharField(max_length=80, unique=True, blank=True)
+    folio_de_identificacion = models.CharField(max_length=80, null=True, blank=True)
+    emite_identificacion = models.CharField(max_length=80, null=True, blank=True)
+    clave_larga_distancia = models.CharField(max_length=10, validators=[RegexValidator(r'^\d{1,10}$')], blank=True, null=True)
+    telefono_casa = models.CharField(max_length=10, validators=[RegexValidator(r'^\d{1,10}$')], blank=True, null=True)
+    telefono_casa_2 = models.CharField(max_length=10, validators=[RegexValidator(r'^\d{1,10}$')], blank=True, null=True)
+    extension = models.CharField(max_length=10, validators=[RegexValidator(r'^\d{1,10}$')], blank=True, null=True)
+    celular = models.CharField(max_length=10, validators=[RegexValidator(r'^\d{1,10}$')])
+    celular_2 = models.CharField(max_length=10, validators=[RegexValidator(r'^\d{1,10}$')], blank=True, null=True)
+    telefono_oficina = models.CharField(max_length=10, validators=[RegexValidator(r'^\d{1,10}$')], blank=True, null=True)
+    telefono_oficina_2 = models.CharField(max_length=10, validators=[RegexValidator(r'^\d{1,10}$')], blank=True, null=True)
+    email = models.CharField(max_length=80)
+    email_2 = models.CharField(max_length=80, blank=True, null=True)
+    email_3 = models.CharField(max_length=80, blank=True, null=True)
+    facebook = models.CharField(max_length=80, blank=True, null=True)
+    twitter = models.CharField(max_length=80, blank=True, null=True)
+    web = models.CharField(max_length=80, blank=True, null=True)
     estado_civil = models.IntegerField(choices=ESTADOCIVIL)
-    conyuge_apellido_paterno = models.CharField(max_length=80, blank=True)
-    conyuge_apellido_materno = models.CharField(max_length=80, blank=True)
-    conyuge_nombre = models.CharField(max_length=80, blank=True)
-    fecha_matrimonio = models.DateField(null=False, blank=True)
-    registro_civil = models.CharField(max_length=80, unique=True, blank=True)
-    nro_acta = models.CharField(max_length=80, unique=True, blank=True)
-    fecha_creacion = models.DateField(auto_created=True)
+    conyuge_apellido_paterno = models.CharField(max_length=80, blank=True, null=True)
+    conyuge_apellido_materno = models.CharField(max_length=80, blank=True, null=True)
+    conyuge_nombre = models.CharField(max_length=80, blank=True, null=True)
+    fecha_matrimonio = models.DateField(blank=True, null=True)
+    registro_civil = models.CharField(max_length=80, blank=True, null=True)
+    nro_acta = models.CharField(max_length=80, blank=True, null=True)
+    # fecha_creacion = models.DateField(auto_created=True)
 
     def get_full_name(self):
-        full_name = '%s %s %s' % (self.nombre, self.apellido_paterno, self.apellido_materno)
+        full_name = '%s. %s %s %s' % (self.TITULOPERSONAL[self.titulo][1], self.nombre, self.apellido_paterno, self.apellido_materno)
         return full_name.strip()
 
     def __str__(self):

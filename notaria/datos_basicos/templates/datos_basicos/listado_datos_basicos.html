@@ -19,8 +19,8 @@
                 <input type="date" name="fecha-inicio" class="form-control">
                 <input type="date" name="fecha-fin" class="form-control">
                 <select name="tipo-tramite" id="tipo-tramite">
+                    <option value="-1" selected>Trámite</option>
                     {% for tipo in tipo_tramites %}
-                        <option value="-1" selected>--seleccione--</option>
                         <option value="{{ tipo.pk }}">{{ tipo.nombre }}</option>
                     {% endfor %}
 
@@ -36,6 +36,7 @@
                 <th>Nombre</th>
                 <th>Celular</th>
                 <th>E-mail</th>
+                <th>Trámite</th>
                 <th>Acciones</th>
                 </thead>
                 <tbody>
@@ -44,6 +45,7 @@
                         <td>{{ basico.get_full_name }}</td>
                         <td>{{ basico.celular }}</td>
                         <td>{{ basico.email }}</td>
+                        <td>{{ basico.tipo_de_tramite.nombre }}</td>
                         <td>
                             <a href="{% url 'datos_basicos:editar_datos_basicos' datos_basicos_id=basico.pk %}"
                                class="btn btn-info btn-sm">Editar</a>
