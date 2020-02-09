@@ -11,6 +11,6 @@ admin.site.register(TipoIdentificacion)
 #admin.site.register(NEstado)
 #admin.site.register(NMunicipio)
 #admin.site.register(NColonia)
-admin.site.register(NCodigoPostal)
+# admin.site.register(NCodigoPostal)
 # Register your models here.
 
