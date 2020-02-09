@@ -1,17 +1,27 @@
-.alta-form {
-    display: flex;
-    flex: 1 1 auto;
-    flex-wrap: wrap;
-}
-.alta-form > p {
-    margin: 15px;
-}
+/*.alta-form {*/
+    /*display: flex;*/
+    /*flex-wrap: wrap;*/
+    /*width: 100%;*/
+/*}*/
+
+/*.alta-form > input, .alta-form > select {*/
+    /*margin: 15px;*/
+    /*flex: 1 1 auto;*/
+    /*width: 22%;*/
+/*}*/
+
 .flex {
     display: flex;
 }
+
 .flex-end {
     justify-content: flex-end;
 }
+
 .filters-form > * {
     margin: 10px;
+}
+
+.alta-form label:first-letter{
+    text-transform: uppercase;
 }
