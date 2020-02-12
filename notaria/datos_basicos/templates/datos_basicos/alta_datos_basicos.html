@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-    <div class="row">
-        <h2>Datos Basicos</h2>
-    </div>
-    <hr>
     <form action="#" method="POST" class="form-horizontal alta-form ">
         {% csrf_token %}
+        <h4 class="mt-4">Datos básicos</h4>
+        <hr>
         <div class="row">
             <div class="col-3">
                 <label for="">Tipo de trámite</label>
@@ -43,7 +41,7 @@
                 {{ form.ocupacion }}
             </div>
         </div>
-        <h4 class="mt-4">Datos Nacimiento y migratiorios</h4>
+        <h4 class="mt-4">Datos de nacimiento y migratiorios</h4>
         <hr>
         <div class="row">
             <div class="col-3">
