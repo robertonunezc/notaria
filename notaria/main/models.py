@@ -78,15 +78,17 @@ class DatosBasicos(Persona):
     CASADO_BIENES_MANCOMUNADOS = 0
     CASADO_BIENES_SEPARADOS = 4
     SOLTERO = 1
-    DIVORCIADO = 2
-    VIUDO = 3
+    # DIVORCIADO = 2
+    # VIUDO = 3
 
     ESTADOCIVIL = (
         (CASADO_BIENES_MANCOMUNADOS, "Casado Bienes Mancomunados"),
         (CASADO_BIENES_SEPARADOS, "Casado Bienes Separados"),
-        (SOLTERO, "Soltero"),
-        (DIVORCIADO, "Divorciado"),
-        (VIUDO, "Viudo")
+        (SOLTERO, "Soltero")
+
+        # ,
+        # (DIVORCIADO, "Divorciado"),
+        # (VIUDO, "Viudo")
     )
 
     titulo = models.IntegerField(choices=TITULOPERSONAL)
