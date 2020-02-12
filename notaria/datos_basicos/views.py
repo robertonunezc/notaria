@@ -73,11 +73,17 @@ def exportar_excel(request):
         fecha_inicio = request.POST.get('fecha-inicio')
         fecha_fin = request.POST.get('fecha-fin')
         tipo_tramite_pk = request.POST.get('tipo-tramite')
+        if tipo_tramite_pk != "-1":
+            tipo_tramite = tipo_tramites.get(pk=tipo_tramite_pk)
         datos_basicos = filtrar_datos_basicos(fecha_inicio, fecha_fin, tipo_tramite_pk, datos_basicos, tipo_tramites)
-
+    if tipo_tramite_pk != "-1":
+        workbook_name = "Reporte_" + tipo_tramite.__str__() + "_" + fecha_inicio + " a " + fecha_fin + "_" +".xls"
+    else:
+        workbook_name = "Reporte_" + fecha_inicio + "_" + fecha_fin + "_" + ".xls"
     wb = get_reporte_datos_basicos_workbook(datos_basicos=datos_basicos)
     response = HttpResponse(content_type='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename="reporte.xls"'
+    response['Content-Disposition'] = "attachment; filename=" + workbook_name
+
     wb.save(response)
     return response
 
@@ -133,4 +139,6 @@ def get_reporte_datos_basicos_workbook(datos_basicos):
         datos_list.append(dato.registro_civil.__str__())
         datos_list.append(dato.nro_acta.__str__())
         ws.append(datos_list)
+
+
     return wb

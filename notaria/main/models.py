@@ -122,7 +122,7 @@ class DatosBasicos(Persona):
     fecha_matrimonio = models.DateField(blank=True, null=True)
     registro_civil = models.CharField(max_length=80, blank=True, null=True)
     nro_acta = models.CharField(max_length=80, blank=True, null=True)
-    # fecha_creacion = models.DateField(auto_created=True)
+    fecha_creacion = models.DateField(auto_created=True, blank=True, null=True)
 
     def get_full_name(self):
         full_name = '%s. %s %s %s' % (self.TITULOPERSONAL[self.titulo][1], self.nombre, self.apellido_paterno, self.apellido_materno)
