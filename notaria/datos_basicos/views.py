@@ -85,15 +85,52 @@ def exportar_excel(request):
 def get_reporte_datos_basicos_workbook(datos_basicos):
     wb = Workbook()
     ws = wb.active
-    titulos = list()
-    titulos.append("Nombre")
-    titulos.append("Celular")
-    titulos.append("Email")
+    titulos = ['Titulo' , 'Nombre y apellidos','Fecha Nacimiento' ,'Sexo','Ocupacion', 'Pais nacimiento', 'Pais Nacionalidad', 'Ciudad de origen', 'Documento migratorio','Calidad migratoria',
+               'Tipo de identificacion', 'Folio de identificacion','Emite identificacion', 'Clave larga distancia', 'Telefono casa','Telefono casa 2', 'Extension',
+               'Celular', 'Telefono oficina', 'Telefono oficina 2','Email', 'Email 2', 'Email 3', 'Facebook', 'Twitter', 'Web','Estado civil', 'Conyuge apellido paterno',
+               'Conyuge apellido materno','Conyuge nombre', 'Fecha matrimonio', 'Registro civil','Nro acta']
+
+    #ttt = filter(lambda aname: (not aname.startswith('_') and not aname.startswith('get') and not aname.startswith('clean') and not aname.startswith('prepare') and not aname.startswith('serializable')
+     #                           and not aname.startswith('date') and not aname.startswith('datosba') and not aname.startswith('full') and not aname.startswith('persona') and not aname.startswith('pk'))
+      #                          and not aname.startswith('refresh') and not aname.startswith('save') and not aname.startswith('unique') and not aname.startswith('validate'), dir(DatosBasicos))
+
     ws.append(titulos)
     for dato in datos_basicos:
         datos_list = list()
+        datos_list.append(dato.get_titulo_display())
         datos_list.append(dato.__str__())
+        datos_list.append(dato.fecha_nacimiento.__str__())
+        datos_list.append(dato.get_sexo_display())
+        datos_list.append(dato.ocupacion.__str__())
+        datos_list.append(dato.pais_nacimiento.__str__())
+        datos_list.append(dato.pais_nacionalidad.__str__())
+        datos_list.append(dato.ciudad_de_origen.__str__())
+        datos_list.append(dato.documento_migratorio.__str__())
+        datos_list.append(dato.calidad_migratoria.__str__())
+        datos_list.append(dato.tipo_de_identificacion.__str__())
+        datos_list.append(dato.folio_de_identificacion.__str__())
+        datos_list.append(dato.emite_identificacion.__str__())
+        datos_list.append(dato.clave_larga_distancia.__str__())
+        datos_list.append(dato.telefono_casa.__str__())
+        datos_list.append(dato.telefono_casa_2.__str__())
+        datos_list.append(dato.extension.__str__())
         datos_list.append(dato.celular.__str__())
+        #datos_list.append(dato.celular2.__str__())
+        datos_list.append(dato.telefono_oficina.__str__())
+        datos_list.append(dato.telefono_oficina_2.__str__())
         datos_list.append(dato.email.__str__())
+        datos_list.append(dato.email_2.__str__())
+        datos_list.append(dato.email_3.__str__())
+        datos_list.append(dato.email.__str__())
+        datos_list.append(dato.facebook.__str__())
+        datos_list.append(dato.twitter.__str__())
+        datos_list.append(dato.web.__str__())
+        datos_list.append(dato.estado_civil.__str__())
+        datos_list.append(dato.conyuge_apellido_paterno.__str__())
+        datos_list.append(dato.conyuge_apellido_materno.__str__())
+        datos_list.append(dato.conyuge_nombre.__str__())
+        datos_list.append(dato.fecha_matrimonio.__str__())
+        datos_list.append(dato.registro_civil.__str__())
+        datos_list.append(dato.nro_acta.__str__())
         ws.append(datos_list)
     return wb
