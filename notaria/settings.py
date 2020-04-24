@@ -25,7 +25,7 @@ SECRET_KEY = 'a+p9bp41yffdtcdaq81)x!@wbn4-3l0683$9%eis!njp+!y1bq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.notaria2cadereyta.com', '107.152.35.116','localhost','notaria2cadereyta.ml']
 
 AUTH_USER_MODEL = 'main.User'
 LOGIN_REDIRECT_URL = '/'
@@ -111,9 +111,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-MX'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Mexico_City'
 
 USE_I18N = True
 
@@ -126,3 +126,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')

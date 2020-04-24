@@ -1,3 +1,5 @@
+import re
+
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 from django.core.validators import RegexValidator
@@ -94,6 +96,9 @@ class DatosBasicos(Persona):
     titulo = models.IntegerField(choices=TITULOPERSONAL)
     fecha_nacimiento = models.DateField(null=False, blank=False)
     sexo = models.IntegerField(choices=GENERO)
+    alphanumeric = RegexValidator(re.compile(r'^[\w\d]*$', re.UNICODE))
+    curp = models.CharField(max_length=18, validators=[alphanumeric], blank=True, null=True)
+    rfc = models.CharField(max_length=13, validators=[alphanumeric], blank=True, null=True)
     ocupacion = models.ForeignKey(Ocupacion, on_delete=models.SET_NULL, null=True)
     pais_nacimiento = models.CharField(max_length=80) #models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True, related_name='natural')
     pais_nacionalidad = models.CharField(max_length=80) #models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True, related_name='nacionalidad')

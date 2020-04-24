@@ -91,7 +91,7 @@ def exportar_excel(request):
 def get_reporte_datos_basicos_workbook(datos_basicos):
     wb = Workbook()
     ws = wb.active
-    titulos = ['Titulo' , 'Nombre y apellidos','Fecha Nacimiento' ,'Sexo','Ocupacion', 'Pais nacimiento', 'Pais Nacionalidad', 'Ciudad de origen', 'Documento migratorio','Calidad migratoria',
+    titulos = ['Titulo' , 'Nombre y apellidos','Fecha Nacimiento' ,'Sexo','CURP', 'RFC', 'Ocupacion', 'Pais nacimiento', 'Pais Nacionalidad', 'Ciudad de origen', 'Documento migratorio','Calidad migratoria',
                'Tipo de identificacion', 'Folio de identificacion','Emite identificacion', 'Clave larga distancia', 'Telefono casa','Telefono casa 2', 'Extension',
                'Celular', 'Telefono oficina', 'Telefono oficina 2','Email', 'Email 2', 'Email 3', 'Facebook', 'Twitter', 'Web','Estado civil', 'Conyuge apellido paterno',
                'Conyuge apellido materno','Conyuge nombre', 'Fecha matrimonio', 'Registro civil','Nro acta']
@@ -107,6 +107,8 @@ def get_reporte_datos_basicos_workbook(datos_basicos):
         datos_list.append(dato.__str__())
         datos_list.append(dato.fecha_nacimiento.__str__())
         datos_list.append(dato.get_sexo_display())
+        datos_list.append(dato.curp.__str__())
+        datos_list.append(dato.rfc.__str__())
         datos_list.append(dato.ocupacion.__str__())
         datos_list.append(dato.pais_nacimiento.__str__())
         datos_list.append(dato.pais_nacionalidad.__str__())
