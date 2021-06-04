@@ -1,4 +1,4 @@
-Django==2.2.10
+Django==2.2.21
 djangorestframework
 mysqlclient==1.4.6
 pdfkit==0.6
